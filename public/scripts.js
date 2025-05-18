@@ -14,11 +14,11 @@ async function classifyFromUrl() {
    }
 
    try {
-      // First display the image preview
+      // Display image preview
       preview.src = imageUrl;
       preview.style.display = "block";
 
-      // Add event listeners for image loading/error
+      // Event listeners for image loading/error
       await new Promise((resolve, reject) => {
          preview.onload = resolve;
          preview.onerror = () => {
@@ -28,7 +28,7 @@ async function classifyFromUrl() {
          };
       });
 
-      // Then make the classification request
+      // Make request to backend API
       const response = await fetch("http://localhost:3000/classify", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
@@ -50,12 +50,12 @@ async function classifyFromUrl() {
 
       // Display results
       let html = "<h3>Car Type Prediction</h3>";
-      data.predictions.forEach((pred) => {
-         const percent = Math.round(pred.probability * 100);
+      data.predictions.forEach((predict) => {
+         const percent = Math.round(predict.probability * 100);
          html += `
                <div class="prediction">
                    <div class="prediction-label">${
-                      pred.tagName || pred.tag
+                      predict.tagName || predict.tag
                    }: ${percent}%</div>
                    <div class="progress-bar">
                        <div class="progress" style="width: ${percent}%"></div>
@@ -67,7 +67,8 @@ async function classifyFromUrl() {
       resultsDiv.innerHTML = html || "<p>No predictions returned</p>";
    } catch (error) {
       console.error("Classification error:", error);
-      preview.style.display = "none"; // Hide preview if there was an error
+      // Hide preview if there was an error
+      preview.style.display = "none";
       resultsDiv.innerHTML = `
            <p class="error">Error: ${error.message}</p>
            <p>Please check the URL and try again.</p>
@@ -75,7 +76,7 @@ async function classifyFromUrl() {
    }
 }
 
-// Optional: Add event listener for Enter key
+// Event listener for Enter key
 document.getElementById("imageUrl").addEventListener("keypress", function (e) {
    if (e.key === "Enter") {
       classifyFromUrl();
