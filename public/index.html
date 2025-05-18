@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>@azure/cognitiveservices-customvision-prediction sample</title>
+      <script src="node_modules/@azure/ms-rest-js/dist/msRest.browser.js"></script>
+      <script src="node_modules/@azure/cognitiveservices-customvision-prediction/dist/cognitiveservices-customvision-prediction.js"></script>
+      <script type="text/javascript">
+         const customVisionPredictionKey =
+            "<YOUR_CUSTOM_VISION_PREDICTION_KEY>";
+         const customVisionPredictionEndPoint =
+            "<YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT>";
+         const projectId = "<YOUR_CUSTOM_VISION_PREDICTION_PROJECTID>";
+         const cognitiveServiceCredentials = new msRest.ApiKeyCredentials({
+            inHeader: {
+               "Ocp-Apim-Subscription-Key": customVisionPredictionKey,
+            },
+         });
+
+         const imageURL =
+            "https://www.atlantatrails.com/wp-content/uploads/2019/02/north-georgia-waterfalls-1024x683.jpg";
+
+         const client =
+            new Azure.CognitiveservicesCustomvisionPrediction.PredictionAPIClient(
+               cognitiveServiceCredentials,
+               customVisionPredictionEndPoint
+            );
+
+         client
+            .classifyImageUrl(projectId, "Iteration1", { url: imageURL })
+            .then((result) => {
+               console.log("The result is: ");
+               console.log(result);
+            })
+            .catch((err) => {
+               console.log("An error occurred:");
+               console.error(err);
+            });
+      </script>
+   </head>
+   <body></body>
+</html>
