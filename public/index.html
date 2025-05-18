@@ -1,41 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
    <head>
-      <title>@azure/cognitiveservices-customvision-prediction sample</title>
-      <script src="node_modules/@azure/ms-rest-js/dist/msRest.browser.js"></script>
-      <script src="node_modules/@azure/cognitiveservices-customvision-prediction/dist/cognitiveservices-customvision-prediction.js"></script>
-      <script type="text/javascript">
-         const customVisionPredictionKey =
-            "<YOUR_CUSTOM_VISION_PREDICTION_KEY>";
-         const customVisionPredictionEndPoint =
-            "<YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT>";
-         const projectId = "<YOUR_CUSTOM_VISION_PREDICTION_PROJECTID>";
-         const cognitiveServiceCredentials = new msRest.ApiKeyCredentials({
-            inHeader: {
-               "Ocp-Apim-Subscription-Key": customVisionPredictionKey,
-            },
-         });
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+         rel="icon"
+         type="image/x-icon"
+         href="/l5-mission01/images/download.png" />
+      <script defer src="scripts.js"></script>
 
-         const imageURL =
-            "https://www.atlantatrails.com/wp-content/uploads/2019/02/north-georgia-waterfalls-1024x683.jpg";
-
-         const client =
-            new Azure.CognitiveservicesCustomvisionPrediction.PredictionAPIClient(
-               cognitiveServiceCredentials,
-               customVisionPredictionEndPoint
-            );
-
-         client
-            .classifyImageUrl(projectId, "Iteration1", { url: imageURL })
-            .then((result) => {
-               console.log("The result is: ");
-               console.log(result);
-            })
-            .catch((err) => {
-               console.log("An error occurred:");
-               console.error(err);
-            });
-      </script>
+      <link rel="stylesheet" href="styles.css" />
+      <title>Turners Auto Insurance</title>
    </head>
-   <body></body>
+   <body>
+      <h1>Car Type Identifier</h1>
+      <div class="input-container">
+         <input
+            type="text"
+            id="imageUrl"
+            placeholder="Enter image URL (e.g., https://example.com/car.jpg)" />
+         <button class="classify-btn" onclick="classifyFromUrl()">
+            Classify
+         </button>
+      </div>
+      <img id="imagePreview" alt="Vehicle preview" />
+      <div id="results" class="results-container"></div>
+
+      <script></script>
+   </body>
 </html>
