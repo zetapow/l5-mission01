@@ -1,4 +1,9 @@
+/**
+ * Function to classify car from URL
+ */
+
 async function classifyFromUrl() {
+   // DOM elements
    const urlInput = document.getElementById("imageUrl");
    const resultsDiv = document.getElementById("results");
    const preview = document.getElementById("imagePreview");
