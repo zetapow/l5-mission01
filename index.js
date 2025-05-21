@@ -20,7 +20,7 @@ const predictor = new PredictionAPIClient(
    new ApiKeyCredentials({
       inHeader: { "Prediction-key": process.env.VISION_PREDICTION_KEY },
    }),
-   process.env.VISION_PREDICTION_ENDPOINT
+   process.env.VISION_ENDPOINT
 );
 
 // Helper function with timeout and better error handling
@@ -51,7 +51,7 @@ app.post("/classify", async (req, res) => {
 
       console.log("Classifying image...");
       const results = await predictor.classifyImage(
-         process.env.VISION_PREDICTION_RESOURCE_ID,
+         process.env.VISION_ID,
          process.env.VISION_NAME,
          imageBuffer
       );
@@ -78,8 +78,8 @@ app.post("/classify", async (req, res) => {
 app.listen(PORT, () => {
    console.log(`Server running on http://localhost:${PORT}`);
    console.log("Custom Vision Config:", {
-      endpoint: process.env.VISION_PREDICTION_ENDPOINT,
-      projectId: process.env.VISION_PREDICTION_RESOURCE_ID,
+      endpoint: process.env.VISION_ENDPOINT,
+      projectId: process.env.VISION_ID,
       publishedName: process.env.VISION_NAME,
    });
 });
