@@ -29,7 +29,7 @@ async function classifyFromUrl() {
       });
 
       // Make request to backend API
-      const response = await fetch("http://localhost:3000/classify", {
+      const response = await fetch("http://localhost:3000/predict", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify({ imageUrl: imageUrl }),
