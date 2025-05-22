@@ -11,7 +11,7 @@ const predictImage = async (req, res) => {
       const imageBuffer = await getImageFromUrl(imageUrl);
       const results = await predictor.classifyImage(
          process.env.VISION_ID,
-         process.env.VISION_Name,
+         process.env.VISION_NAME,
          imageBuffer
       );
 
